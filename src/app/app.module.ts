@@ -12,12 +12,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { CountriesComponent } from './components/countries/countries.component';
+import { ContinentsComponent } from './components/continents/continents.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    SidenavComponent
+    SidenavComponent,
+    CountriesComponent,
+    ContinentsComponent
   ],
   imports: [
     BrowserModule,
