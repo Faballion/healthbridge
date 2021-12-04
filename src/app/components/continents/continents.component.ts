@@ -8,14 +8,45 @@ import { CovidService } from 'src/app/services/covid.service';
 })
 export class ContinentsComponent implements OnInit {
 
+  continents = [
+    {
+      continentName: 'Africa',
+      newCases: '5000',
+      newCasesPercentage: '5%',
+      activeCases: '3434',
+      activeCasesPercentage: '3%',
+      deaths: '4334',
+      deathsPercentage: '3%',
+    },
+    {
+      continentName: 'Europe',
+      newCases: '5000',
+      newCasesPercentage: '5%',
+      activeCases: '3434',
+      activeCasesPercentage: '3%',
+      deaths: '4334',
+      deathsPercentage: '3%',
+    },
+  ]
+  
+  displayedColumns: string[] = [
+    'continentName', 
+    'newCases', 
+    'newCasesPercentage', 
+    'activeCases', 
+    'activeCasesPercentage', 
+    'deaths', 
+    'deathsPercentage'
+  ];
+
   constructor(private covidService: CovidService) { }
 
   ngOnInit(): void {
-    this.getCountries();
+    this.getStats();
   }
 
-  getCountries() {
-    this.covidService.getCountries().subscribe(data => {
+  getStats() {
+    this.covidService.getStats().subscribe(data => {
       console.log(data);
     });
   }

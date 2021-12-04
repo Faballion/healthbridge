@@ -11,16 +11,11 @@ export class CovidService {
   constructor(private http:HttpClient) { }
 
   /**
-   * Get the countries data from Rapid API
+   * Get the stats data from Rapid API
    */
-  getCountries(): Observable<countries> {
+  getStats(): Observable<any> {
     let headers = this.headers;
-    let url = 'https://covid-193.p.rapidapi.com/countries'
-    return this.http.get<countries>(url,{headers});
+    let url = 'https://covid-193.p.rapidapi.com/statistics'
+    return this.http.get<any>(url,{headers});
   }
-
-}
-
-export interface countries {
-
 }

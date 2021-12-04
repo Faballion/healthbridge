@@ -1,1 +1,45 @@
-<p>continents works!</p>
+<div class='container'>
+    <h1>Continents</h1>
+    <mat-divider></mat-divider>
+    <div>
+        <table mat-table [dataSource]="continents" class="mat-elevation-z0">
+            <ng-container matColumnDef="continentName">
+                <th mat-header-cell *matHeaderCellDef>Continent</th>
+                <td mat-cell *matCellDef="let continent">{{continent.continentName}}</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="newCases">
+                <th mat-header-cell *matHeaderCellDef>New Cases</th>
+                <td mat-cell *matCellDef="let continent">{{continent.newCases}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="newCasesPercentage">
+                <th mat-header-cell *matHeaderCellDef>New Cases %</th>
+                <td mat-cell *matCellDef="let continent">{{continent.newCasesPercentage}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="activeCases">
+                <th mat-header-cell *matHeaderCellDef>Active Cases</th>
+                <td mat-cell *matCellDef="let continent">{{continent.activeCases}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="activeCasesPercentage">
+                <th mat-header-cell *matHeaderCellDef>Active Cases %</th>
+                <td mat-cell *matCellDef="let continent">{{continent.activeCasesPercentage}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="deaths">
+                <th mat-header-cell *matHeaderCellDef>Deaths</th>
+                <td mat-cell *matCellDef="let continent">{{continent.deaths}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="deathsPercentage">
+                <th mat-header-cell *matHeaderCellDef>Deaths %</th>
+                <td mat-cell *matCellDef="let continent">{{continent.deathsPercentage}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
