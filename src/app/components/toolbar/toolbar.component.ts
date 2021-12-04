@@ -20,5 +20,4 @@ export class ToolbarComponent implements OnInit {
     this.toggleEvent.emit(this.isOpen);
   }
 
-
 }

@@ -18,5 +18,4 @@ export class SidenavComponent implements OnInit {
     this.toggleEvent.emit();
   }
 
-
 }
