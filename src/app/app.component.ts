@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'health-bridge-assessment';
+
+  isSideNavOpened = false;
+
+  toggleSideNav(open: boolean) {
+    this.isSideNavOpened = open;
+  }
+
 }
