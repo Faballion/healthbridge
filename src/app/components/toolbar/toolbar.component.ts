@@ -7,9 +7,18 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
+  isOpen = false;
+  @Output() toggleEvent = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  toggleSideNav() {
+    this.isOpen = !this.isOpen;
+    this.toggleEvent.emit(this.isOpen);
+  }
+
 
 }

@@ -1,2 +1,14 @@
-<app-toolbar></app-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="all-wrap">
+
+  <mat-sidenav #sidenav mode="over">
+    <app-sidenav (toggleEvent)="sidenav.toggle()"></app-sidenav>
+  </mat-sidenav>
+
+  <div class="page-wrap">
+    <app-toolbar (toggleEvent)="sidenav.toggle()"></app-toolbar>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</mat-sidenav-container>
