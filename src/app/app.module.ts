@@ -14,6 +14,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { CountriesComponent } from './components/countries/countries.component';
 import { ContinentsComponent } from './components/continents/continents.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CovidService } from './services/covid.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ContinentsComponent } from './components/continents/continents.componen
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     // Material Modules
@@ -34,7 +37,7 @@ import { ContinentsComponent } from './components/continents/continents.componen
     MatButtonModule,
     MatListModule,
   ],
-  providers: [],
+  providers: [CovidService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

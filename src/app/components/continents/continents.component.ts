@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CovidService } from 'src/app/services/covid.service';
 
 @Component({
   selector: 'app-continents',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContinentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private covidService: CovidService) { }
 
   ngOnInit(): void {
+    this.getCountries();
+  }
+
+  getCountries() {
+    this.covidService.getCountries().subscribe(data => {
+      console.log(data);
+    });
   }
 
 }
