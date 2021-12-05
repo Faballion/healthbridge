@@ -7,6 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountriesComponent implements OnInit {
 
+  displayedColumns: string[] = [
+    'continentName', 
+    'countryName', 
+    'newCases', 
+    'newCasesPercentage', 
+    'activeCases', 
+    'activeCasesPercentage', 
+    'deaths', 
+    'deathsPercentage'
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

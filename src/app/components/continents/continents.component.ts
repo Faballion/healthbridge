@@ -8,7 +8,7 @@ import { CovidService, Stats } from 'src/app/services/covid.service';
 })
 export class ContinentsComponent implements OnInit {
 
-    displayedColumns: string[] = [
+  displayedColumns: string[] = [
     'continentName', 
     'newCases', 
     'newCasesPercentage', 
