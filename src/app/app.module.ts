@@ -10,10 +10,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { CountriesComponent } from './components/countries/countries.component';
 import { ContinentsComponent } from './components/continents/continents.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CovidService } from './services/covid.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { ContinentsComponent } from './components/continents/continents.componen
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     // Material Modules
@@ -33,8 +37,9 @@ import { ContinentsComponent } from './components/continents/continents.componen
     MatIconModule,
     MatButtonModule,
     MatListModule,
+    MatTableModule,
   ],
-  providers: [],
+  providers: [CovidService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
