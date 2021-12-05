@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { CountriesComponent } from './components/countries/countries.component';
@@ -38,6 +39,7 @@ import { CovidService } from './services/covid.service';
     MatButtonModule,
     MatListModule,
     MatTableModule,
+    MatCardModule,
   ],
   providers: [CovidService],
   bootstrap: [AppComponent]

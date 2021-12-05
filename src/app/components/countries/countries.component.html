@@ -1,50 +1,27 @@
 <div class='container'>
     <h1>Countries</h1>
     <mat-divider></mat-divider>
-    <div>
-        <table mat-table class="mat-elevation-z0">
-            <ng-container matColumnDef="continentName">
-                <th mat-header-cell *matHeaderCellDef>Continent</th>
-                <td mat-cell *matCellDef="let country">{{country.continentName}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="countryName">
-                <th mat-header-cell *matHeaderCellDef>Country</th>
-                <td mat-cell *matCellDef="let country">{{country.countryName}}</td>
-            </ng-container>
-        
-            <ng-container matColumnDef="newCases">
-                <th mat-header-cell *matHeaderCellDef>New Cases</th>
-                <td mat-cell *matCellDef="let country">{{country.newCases}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="newCasesPercentage">
-                <th mat-header-cell *matHeaderCellDef>New Cases %</th>
-                <td mat-cell *matCellDef="let country">{{country.newCasesPercentage}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="activeCases">
-                <th mat-header-cell *matHeaderCellDef>Active Cases</th>
-                <td mat-cell *matCellDef="let country">{{country.activeCases}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="activeCasesPercentage">
-                <th mat-header-cell *matHeaderCellDef>Active Cases %</th>
-                <td mat-cell *matCellDef="let country">{{country.activeCasesPercentage}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="deaths">
-                <th mat-header-cell *matHeaderCellDef>Deaths</th>
-                <td mat-cell *matCellDef="let country">{{country.deaths}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="deathsPercentage">
-                <th mat-header-cell *matHeaderCellDef>Deaths %</th>
-                <td mat-cell *matCellDef="let country">{{country.deathsPercentage}}</td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+    <br>
+    <div class='card-container'>
+        <div class='country-card' *ngFor="let country of countries; let i = index">
+            <mat-card>
+                <mat-card-title>{{country.countryName}}</mat-card-title>
+                <mat-card-subtitle>{{country.continentName}}</mat-card-subtitle>
+                <mat-card-content>
+                    <div class='card-stat-grouping'>
+                        <p>New Cases: {{country.newCases}}</p>
+                        <p>New Cases %: {{country.newCases}}%</p>
+                    </div>
+                    <div class='card-stat-grouping'>
+                        <p>Active Cases: {{country.activeCases}}</p>
+                        <p>Active Cases %: {{country.newCases}}%</p>
+                    </div>
+                    <div class='card-stat-grouping'>
+                        <p>Deaths: {{country.deaths}}</p>
+                        <p>Deaths %: {{country.newCases}}%</p>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </div>
