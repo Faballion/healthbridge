@@ -8,28 +8,7 @@ import { CovidService, Stats } from 'src/app/services/covid.service';
 })
 export class ContinentsComponent implements OnInit {
 
-  continents = [
-    {
-      continentName: 'Africa',
-      newCases: '5000',
-      newCasesPercentage: '5%',
-      activeCases: '3434',
-      activeCasesPercentage: '3%',
-      deaths: '4334',
-      deathsPercentage: '3%',
-    },
-    {
-      continentName: 'Europe',
-      newCases: '5000',
-      newCasesPercentage: '5%',
-      activeCases: '3434',
-      activeCasesPercentage: '3%',
-      deaths: '4334',
-      deathsPercentage: '3%',
-    },
-  ]
-  
-  displayedColumns: string[] = [
+    displayedColumns: string[] = [
     'continentName', 
     'newCases', 
     'newCasesPercentage', 
@@ -37,6 +16,15 @@ export class ContinentsComponent implements OnInit {
     'activeCasesPercentage', 
     'deaths', 
     'deathsPercentage'
+  ];
+
+  continents: ContinentStats[] = [
+    { continentName: "Africa" },
+    { continentName: "Oceania" },
+    { continentName: "Europe" },
+    { continentName: "Asia" },
+    { continentName: "North-America" },
+    { continentName: "South-America" },
   ];
 
   constructor(private covidService: CovidService) { }
@@ -56,16 +44,74 @@ export class ContinentsComponent implements OnInit {
    */
   compileContinentData(stats: Stats) {
     console.log(stats);
+
+    let gobalNewCases = 0;
+    let globalActiveCases = 0;
+    let globalDeaths = 0;
+
+    // Calculate totals
+    for (let stat of stats.response) {
+      for (let continent of this.continents) {
+        if (continent.continentName === stat.continent) {
+          // New cases
+          let newCasesNum = stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0;
+          if (continent?.newCases) {
+            continent.newCases += newCasesNum;
+          }
+          else {
+            continent.newCases = newCasesNum;
+          }
+          gobalNewCases += newCasesNum
+
+          // Active cases
+          if (continent?.activeCases) {
+            continent.activeCases += stat.cases.active;
+          }
+          else {
+            continent.activeCases = stat.cases.active;
+          }
+          globalActiveCases += stat.cases.active
+
+          // Deaths
+          if (continent?.deaths) {
+            continent.deaths += stat.deaths.total;
+          }
+          else {
+            continent.deaths = stat.deaths.total;
+          }
+
+          globalDeaths += stat.deaths.total
+        }
+      } 
+    }
+
+    // Calculate %
+    for (let continent of this.continents) {
+      // New cases %
+      if (continent?.newCases) {
+        continent.newCasesPercentage = (continent.newCases / gobalNewCases * 100).toFixed(2) + '%';
+      }
+
+      // Active cases %
+      if (continent?.activeCases) {
+        continent.activeCasesPercentage = (continent.activeCases / globalActiveCases * 100).toFixed(2) + '%';
+      }
+
+      // Deaths %
+      if (continent?.deaths) {
+        continent.deathsPercentage = (continent.deaths / globalDeaths * 100).toFixed(2) + '%';
+      }
+    }
   }
 
 }
 
 export interface ContinentStats {
-  continentName: string;
-  newCases: number;
-  newCasesPercentage: string
-  activeCases: number
-  activeCasesPercentage: string
-  deaths: number
-  deathsPercentage: string;
+  continentName?: string;
+  newCases?: number;
+  newCasesPercentage?: string;
+  activeCases?: number;
+  activeCasesPercentage?: string;
+  deaths?: number;
+  deathsPercentage?: string;
 }
