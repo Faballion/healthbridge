@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CovidService } from 'src/app/services/covid.service';
+import { CovidService, Stats } from 'src/app/services/covid.service';
 
 @Component({
   selector: 'app-continents',
@@ -46,9 +46,26 @@ export class ContinentsComponent implements OnInit {
   }
 
   getStats() {
-    this.covidService.getStats().subscribe(data => {
-      console.log(data);
+    this.covidService.getStats().subscribe((data: Stats) => {
+      this.compileContinentData(data);
     });
   }
 
+  /**
+   * Compiles all the data for display
+   */
+  compileContinentData(stats: Stats) {
+    console.log(stats);
+  }
+
+}
+
+export interface ContinentStats {
+  continentName: string;
+  newCases: number;
+  newCasesPercentage: string
+  activeCases: number
+  activeCasesPercentage: string
+  deaths: number
+  deathsPercentage: string;
 }
