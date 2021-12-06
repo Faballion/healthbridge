@@ -1,0 +1,28 @@
+<div class='container'>
+    <h1>Countries</h1>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-spinner *ngIf="showLoading" class="page-loading" diameter="50"></mat-spinner>
+    <div class='card-container'>
+        <div class='country-card' *ngFor="let country of countries; let i = index">
+            <mat-card>
+                <mat-card-title>{{country.countryName}}</mat-card-title>
+                <mat-card-subtitle>{{country.continentName}}</mat-card-subtitle>
+                <mat-card-content>
+                    <div class='card-stat-grouping'>
+                        <p>New Cases: {{country.newCases}}</p>
+                        <p *ngIf="country.newCasesPercentage !== undefined">New Cases %: {{country.newCasesPercentage}}%</p>
+                    </div>
+                    <div class='card-stat-grouping'>
+                        <p>Active Cases: {{country.activeCases}}</p>
+                        <p *ngIf="country.activeCasesPercentage !== undefined">Active Cases %: {{country.activeCasesPercentage}}%</p>
+                    </div>
+                    <div class='card-stat-grouping'>
+                        <p>Deaths: {{country.deaths}}</p>
+                        <p *ngIf="country.deathsPercentage !== undefined">Deaths %: {{country.deathsPercentage}}%</p>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

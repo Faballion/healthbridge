@@ -1,0 +1,26 @@
+<mat-nav-list class="container">
+    <div class="header">
+        <button mat-icon-button (click)="toggleSideNav()" aria-label="toggle side menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a routerLink="" (click)="toggleSideNav()">
+          HealthBridge Assessment
+        </a>
+    </div>
+
+    <mat-divider></mat-divider>
+    
+    <a mat-list-item routerLink="/countries" routerLinkActive="active" (click)="toggleSideNav()">
+        <mat-icon matListIcon>
+            travel_explore
+        </mat-icon>
+        Countries
+    </a>
+    <a mat-list-item routerLink="/continents" routerLinkActive="active" (click)="toggleSideNav()">
+        <mat-icon matListIcon>
+            public
+        </mat-icon>
+        Continents
+    </a>
+</mat-nav-list>
+  
