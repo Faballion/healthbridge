@@ -38,7 +38,7 @@ export class CountriesComponent implements OnInit {
     for (let stat of stats.response) {
       // Compile continent stats
       for (let continent of continents) {
-        if (continent.continentName === stat.continent) {
+        if (continent.continentName === stat.continent && (stat.continent !== stat.country)) {
           // New cases
           let newCasesNum = stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0;
           if (continent?.newCases) {
@@ -69,36 +69,37 @@ export class CountriesComponent implements OnInit {
     }
 
     for (let stat of stats.response) {
-      let continent = continents.find(continent => continent.continentName === stat.continent);
+      if ((stat.continent !== stat.country)) {
+        let continent = continents.find(continent => continent.continentName === stat.continent);
 
-      let newCasesPercentage;
-      let activeCasesPercentage;
-      let deathsPercentage;
+        let newCasesPercentage;
+        let activeCasesPercentage;
+        let deathsPercentage;
 
-      if (continent?.newCases) {
-        newCasesPercentage = ((stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0) / continent.newCases * 100).toFixed(2)
-      }
+        if (continent?.newCases) {
+          newCasesPercentage = ((stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0) / continent.newCases * 100).toFixed(2)
+        }
 
-      if (continent?.activeCases) {
-        activeCasesPercentage = (stat.cases.active / continent.activeCases * 100).toFixed(2);
-      }
+        if (continent?.activeCases) {
+          activeCasesPercentage = (stat.cases.active / continent.activeCases * 100).toFixed(2);
+        }
 
-      if (continent?.deaths) {
-        deathsPercentage = (stat.deaths.total / continent.deaths * 100).toFixed(2);
-      }
+        if (continent?.deaths) {
+          deathsPercentage = (stat.deaths.total / continent.deaths * 100).toFixed(2);
+        }
 
-      this.countries.push({
-        continentName: stat.continent,
-        countryName: stat.country,
-        newCases: stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0,
-        newCasesPercentage: newCasesPercentage,
-        activeCases: stat.cases.active,
-        activeCasesPercentage: activeCasesPercentage,
-        deaths: stat.deaths.total,
-        deathsPercentage: deathsPercentage,
-      })
-    };
-
+        this.countries.push({
+          continentName: stat.continent,
+          countryName: stat.country,
+          newCases: stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0,
+          newCasesPercentage: newCasesPercentage,
+          activeCases: stat.cases.active,
+          activeCasesPercentage: activeCasesPercentage,
+          deaths: stat.deaths.total,
+          deathsPercentage: deathsPercentage,
+        })
+      };
+    }
   }
 }
 

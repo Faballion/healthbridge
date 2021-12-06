@@ -52,7 +52,7 @@ export class ContinentsComponent implements OnInit {
     // Calculate totals
     for (let stat of stats.response) {
       for (let continent of this.continents) {
-        if (continent.continentName === stat.continent) {
+        if (continent.continentName === stat.continent && (stat.continent !== stat.country)) {
           // New cases
           let newCasesNum = stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0;
           if (continent?.newCases) {
