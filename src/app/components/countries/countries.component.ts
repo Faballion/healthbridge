@@ -72,9 +72,9 @@ export class CountriesComponent implements OnInit {
       if ((stat.continent !== stat.country)) {
         let continent = continents.find(continent => continent.continentName === stat.continent);
 
-        let newCasesPercentage = 'N/A';
-        let activeCasesPercentage = 'N/A';
-        let deathsPercentage = 'N/A';
+        let newCasesPercentage = undefined;
+        let activeCasesPercentage = undefined;
+        let deathsPercentage = undefined;
 
         if (continent?.newCases) {
           newCasesPercentage = ((stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0) / continent.newCases * 100).toFixed(2)
