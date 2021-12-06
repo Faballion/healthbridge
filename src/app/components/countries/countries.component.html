@@ -2,6 +2,7 @@
     <h1>Countries</h1>
     <mat-divider></mat-divider>
     <br>
+    <mat-spinner *ngIf="showLoading" class="page-loading" diameter="50"></mat-spinner>
     <div class='card-container'>
         <div class='country-card' *ngFor="let country of countries; let i = index">
             <mat-card>

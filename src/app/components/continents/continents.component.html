@@ -2,7 +2,8 @@
     <h1>Continents</h1>
     <mat-divider></mat-divider>
     <br>
-    <div>
+    <mat-spinner *ngIf="showLoading" class="page-loading" diameter="50"></mat-spinner>
+    <div *ngIf="!showLoading">
         <table mat-table [dataSource]="continents" class="mat-elevation-z2">
             <ng-container matColumnDef="continentName">
                 <th mat-header-cell *matHeaderCellDef>Continent</th>

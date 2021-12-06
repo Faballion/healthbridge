@@ -9,6 +9,7 @@ import { CovidService, Stats, ContinentStats } from 'src/app/services/covid.serv
 export class CountriesComponent implements OnInit {
 
   countries: CountryStats[] = [];
+  showLoading = true;
 
   constructor(private covidService: CovidService) { }
 
@@ -19,6 +20,7 @@ export class CountriesComponent implements OnInit {
   getStats() {
     this.covidService.getStats().subscribe((data: Stats) => {
       this.compileCountryData(data);
+      this.showLoading = false;
     });
   }
 

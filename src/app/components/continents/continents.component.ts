@@ -9,6 +9,7 @@ import { CovidService, Stats, ContinentStats } from 'src/app/services/covid.serv
 export class ContinentsComponent implements OnInit {
 
   continents: ContinentStats[] = [];
+  showLoading = true;
   displayedColumns: string[] = [
     'continentName', 
     'newCases', 
@@ -28,6 +29,7 @@ export class ContinentsComponent implements OnInit {
   getStats() {
     this.covidService.getStats().subscribe((data: Stats) => {
       this.compileContinentData(data);
+      this.showLoading = false;
     });
   }
 
