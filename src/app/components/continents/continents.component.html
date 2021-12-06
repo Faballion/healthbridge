@@ -1,9 +1,11 @@
 <div class='container'>
     <h1>Continents</h1>
     <mat-divider></mat-divider>
-    <div>
-        <table mat-table [dataSource]="continents" class="mat-elevation-z0">
-            <ng-container matColumnDef="continentName">
+    <br>
+    <mat-spinner *ngIf="showLoading" class="page-loading" diameter="50"></mat-spinner>
+    <div class='table-container' *ngIf="!showLoading">
+        <table mat-table [dataSource]="continents" class="mat-elevation-z2">
+            <ng-container matColumnDef="continentName" sticky>
                 <th mat-header-cell *matHeaderCellDef>Continent</th>
                 <td mat-cell *matCellDef="let continent">{{continent.continentName}}</td>
             </ng-container>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CovidService, Stats } from 'src/app/services/covid.service';
+import { CovidService, Stats, ContinentStats } from 'src/app/services/covid.service';
 
 @Component({
   selector: 'app-continents',
@@ -8,7 +8,9 @@ import { CovidService, Stats } from 'src/app/services/covid.service';
 })
 export class ContinentsComponent implements OnInit {
 
-    displayedColumns: string[] = [
+  continents: ContinentStats[] = [];
+  showLoading = true;
+  displayedColumns: string[] = [
     'continentName', 
     'newCases', 
     'newCasesPercentage', 
@@ -16,15 +18,6 @@ export class ContinentsComponent implements OnInit {
     'activeCasesPercentage', 
     'deaths', 
     'deathsPercentage'
-  ];
-
-  continents: ContinentStats[] = [
-    { continentName: "Africa" },
-    { continentName: "Oceania" },
-    { continentName: "Europe" },
-    { continentName: "Asia" },
-    { continentName: "North-America" },
-    { continentName: "South-America" },
   ];
 
   constructor(private covidService: CovidService) { }
@@ -36,6 +29,7 @@ export class ContinentsComponent implements OnInit {
   getStats() {
     this.covidService.getStats().subscribe((data: Stats) => {
       this.compileContinentData(data);
+      this.showLoading = false;
     });
   }
 
@@ -43,46 +37,23 @@ export class ContinentsComponent implements OnInit {
    * Compiles all the data for display
    */
   compileContinentData(stats: Stats) {
-    console.log(stats);
+    this.continents = this.covidService.calculateContinentTotals(stats);
 
     let gobalNewCases = 0;
     let globalActiveCases = 0;
     let globalDeaths = 0;
 
-    // Calculate totals
-    for (let stat of stats.response) {
-      for (let continent of this.continents) {
-        if (continent.continentName === stat.continent) {
-          // New cases
-          let newCasesNum = stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0;
-          if (continent?.newCases) {
-            continent.newCases += newCasesNum;
-          }
-          else {
-            continent.newCases = newCasesNum;
-          }
-          gobalNewCases += newCasesNum
-
-          // Active cases
-          if (continent?.activeCases) {
-            continent.activeCases += stat.cases.active;
-          }
-          else {
-            continent.activeCases = stat.cases.active;
-          }
-          globalActiveCases += stat.cases.active
-
-          // Deaths
-          if (continent?.deaths) {
-            continent.deaths += stat.deaths.total;
-          }
-          else {
-            continent.deaths = stat.deaths.total;
-          }
-
-          globalDeaths += stat.deaths.total
-        }
-      } 
+    // Get global totals
+    for (let continent of this.continents) {
+      if (continent?.newCases) {
+        gobalNewCases += continent.newCases;
+      }
+      if (continent?.activeCases) {
+        globalActiveCases += continent.activeCases;
+      }
+      if (continent?.deaths) {
+        globalDeaths += continent.deaths;
+      }
     }
 
     // Calculate %
@@ -104,14 +75,4 @@ export class ContinentsComponent implements OnInit {
     }
   }
 
-}
-
-export interface ContinentStats {
-  continentName?: string;
-  newCases?: number;
-  newCasesPercentage?: string;
-  activeCases?: number;
-  activeCasesPercentage?: string;
-  deaths?: number;
-  deathsPercentage?: string;
 }
