@@ -18,6 +18,54 @@ export class CovidService {
     let url = 'https://covid-193.p.rapidapi.com/statistics'
     return this.http.get<Stats>(url,{headers});
   }
+
+  /**
+   * Calculate and return the totaled stats for the continents
+   */
+  calculateContinentTotals(stats: Stats): ContinentStats[] {
+    let continents: ContinentStats[] = [
+      { continentName: "Africa" },
+      { continentName: "Oceania" },
+      { continentName: "Europe" },
+      { continentName: "Asia" },
+      { continentName: "North-America" },
+      { continentName: "South-America" },
+    ];
+
+    for (let stat of stats.response) {
+      for (let continent of continents) {
+        if (continent.continentName === stat.continent && (stat.continent !== stat.country)) {
+          // New cases
+          let newCasesNum = stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0;
+          if (continent?.newCases) {
+            continent.newCases += newCasesNum;
+          }
+          else {
+            continent.newCases = newCasesNum;
+          }
+
+          // Active cases
+          if (continent?.activeCases) {
+            continent.activeCases += stat.cases.active;
+          }
+          else {
+            continent.activeCases = stat.cases.active;
+          }
+
+          // Deaths
+          if (continent?.deaths) {
+            continent.deaths += stat.deaths.total;
+          }
+          else {
+            continent.deaths = stat.deaths.total;
+          }
+
+        }
+      } 
+    }
+
+    return continents;
+  } 
 }
 
 export interface Stats {

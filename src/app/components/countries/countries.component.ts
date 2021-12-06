@@ -23,58 +23,15 @@ export class CountriesComponent implements OnInit {
   }
 
   compileCountryData(stats: Stats) {
-
-    console.log(stats);
-
-    let continents: ContinentStats[] = [
-      { continentName: "Africa" },
-      { continentName: "Oceania" },
-      { continentName: "Europe" },
-      { continentName: "Asia" },
-      { continentName: "North-America" },
-      { continentName: "South-America" },
-    ];
-
-    for (let stat of stats.response) {
-      // Compile continent stats
-      for (let continent of continents) {
-        if (continent.continentName === stat.continent && (stat.continent !== stat.country)) {
-          // New cases
-          let newCasesNum = stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0;
-          if (continent?.newCases) {
-            continent.newCases += newCasesNum;
-          }
-          else {
-            continent.newCases = newCasesNum;
-          }
-
-          // Active cases
-          if (continent?.activeCases) {
-            continent.activeCases += stat.cases.active;
-          }
-          else {
-            continent.activeCases = stat.cases.active;
-          }
-
-          // Deaths
-          if (continent?.deaths) {
-            continent.deaths += stat.deaths.total;
-          }
-          else {
-            continent.deaths = stat.deaths.total;
-          }
-
-        }
-      } 
-    }
+    let continents: ContinentStats[] = this.covidService.calculateContinentTotals(stats);
 
     for (let stat of stats.response) {
       if ((stat.continent !== stat.country)) {
         let continent = continents.find(continent => continent.continentName === stat.continent);
 
-        let newCasesPercentage = undefined;
-        let activeCasesPercentage = undefined;
-        let deathsPercentage = undefined;
+        let newCasesPercentage;
+        let activeCasesPercentage;
+        let deathsPercentage;
 
         if (continent?.newCases) {
           newCasesPercentage = ((stat.cases.new !== null ? Number(stat.cases.new.substring(1)) : 0) / continent.newCases * 100).toFixed(2)
