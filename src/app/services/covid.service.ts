@@ -35,3 +35,13 @@ export interface Stats {
     population: number;
   }]
 }
+
+export interface ContinentStats {
+  continentName?: string;
+  newCases?: number;
+  newCasesPercentage?: string;
+  activeCases?: number;
+  activeCasesPercentage?: string;
+  deaths?: number;
+  deathsPercentage?: string;
+}

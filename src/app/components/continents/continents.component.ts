@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CovidService, Stats } from 'src/app/services/covid.service';
+import { CovidService, Stats, ContinentStats } from 'src/app/services/covid.service';
 
 @Component({
   selector: 'app-continents',
@@ -104,14 +104,4 @@ export class ContinentsComponent implements OnInit {
     }
   }
 
-}
-
-export interface ContinentStats {
-  continentName?: string;
-  newCases?: number;
-  newCasesPercentage?: string;
-  activeCases?: number;
-  activeCasesPercentage?: string;
-  deaths?: number;
-  deathsPercentage?: string;
 }
